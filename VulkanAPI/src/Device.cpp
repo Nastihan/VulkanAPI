@@ -121,7 +121,7 @@ void Device::PickPhysicalDevice()
 		if (IsDeviceSuitable(device))
 		{
 			physicalDevice = device;
-			break;
+				break;
 		}
 	}
 
@@ -129,12 +129,18 @@ void Device::PickPhysicalDevice()
 	{
 		throw std::runtime_error("failed to find a suitable GPU!");
 	}
+	VkPhysicalDeviceProperties properties;
 
+	vkGetPhysicalDeviceProperties(physicalDevice, &properties);
+	std::cout << "physical device: " << properties.deviceName << std::endl;
 }
 
 bool Device::IsDeviceSuitable(VkPhysicalDevice device)
 {
+	VkPhysicalDeviceProperties deviceProperties;
+	vkGetPhysicalDeviceProperties(device, &deviceProperties);
 
+	return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU;
 }
 
 std::vector<const char*> Device::getRequiredExtensions()
