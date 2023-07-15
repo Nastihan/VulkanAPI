@@ -15,10 +15,19 @@ public:
 
 private:
 	void CreateInstance();
+	void SetupDebugMessenger();
+	void PickPhysicalDevice();
+
+	bool IsDeviceSuitable(VkPhysicalDevice device);
+	std::vector<const char*> getRequiredExtensions();
 	bool CheckValidationLayerSupport();
+	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+
 
 private:
 	VkInstance instance;
+	VkDebugUtilsMessengerEXT debugMessenger;
+	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
 	const std::vector<const char*> validationLayers = { "VK_LAYER_KHRONOS_validation" };
 
