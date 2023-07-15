@@ -7,6 +7,10 @@ class Window
 {
 public:
 	Window(int width, int height, std::string name);
+	bool ShouldClose()
+	{
+		return glfwWindowShouldClose(pWindow);
+	}
 	~Window();
 
 private:

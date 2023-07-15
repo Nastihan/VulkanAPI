@@ -2,4 +2,8 @@
 
 void App::Run()
 {
+	while (!window.ShouldClose())
+	{
+		glfwPollEvents();
+	}
 }
