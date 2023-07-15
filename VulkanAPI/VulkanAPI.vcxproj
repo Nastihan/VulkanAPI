@@ -167,6 +167,11 @@
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="compile.bat" />
+    <None Include="Shaders\FS.frag" />
+    <None Include="Shaders\VS.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

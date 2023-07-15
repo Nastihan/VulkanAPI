@@ -7,6 +7,8 @@ class Window
 {
 public:
 	Window(int width, int height, std::string name);
+	Window(const Window& ) = delete;
+	Window& operator=(const Window&) = delete;
 	bool ShouldClose()
 	{
 		return glfwWindowShouldClose(pWindow);
