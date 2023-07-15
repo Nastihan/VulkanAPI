@@ -29,8 +29,8 @@ std::vector<char> Pipeline::ReadFile(const std::string& filepath)
 
 void Pipeline::CreateGraphicsPipeline(const std::string& VSFilePath,const std::string& FSFilePath)
 {
-	auto test = ReadFile(VSFilePath);
-	auto testt = ReadFile(FSFilePath);
+	auto vertCode = ReadFile(VSFilePath);
+	auto fragCode = ReadFile(FSFilePath);
 
-	std::cout <<test.size() << std::endl;
+	std::cout << vertCode.size() << " " << fragCode.size() << std::endl;
 }
