@@ -2,8 +2,8 @@
 #include "Device.h"
 void App::Run()
 {
-	Device d;
-	d.CreateInstance();
+	Device d{};
+	
 	while (!window.ShouldClose())
 	{
 		glfwPollEvents();
