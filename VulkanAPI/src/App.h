@@ -13,6 +13,7 @@ public:
 	static constexpr int height = 900;
 private:
 	Pipeline p{ "Shaders/VS.vert.spv","Shaders/FS.frag.spv" };
-	Device d;
-	Window window{width,height,"Vulkan"};
+	Window window{ width,height,"Vulkan" };
+	Device d{ window };
+	
 };

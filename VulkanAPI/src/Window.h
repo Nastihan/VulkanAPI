@@ -13,6 +13,7 @@ public:
 	{
 		return glfwWindowShouldClose(pWindow);
 	}
+	void CreateWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 	~Window();
 
 private:

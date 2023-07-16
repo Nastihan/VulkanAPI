@@ -20,12 +20,13 @@ public:
 #else
 	const bool enableValidationLayers = true;
 #endif
-	Device();
+	Device(Window& window);
 	~Device();
 
 private:
 	void CreateInstance();
 	void SetupDebugMessenger();
+	void CreateSurface();
 	void PickPhysicalDevice();
 	void CreateLogicalDevice();
 
@@ -42,6 +43,11 @@ private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
 	VkDevice device;
+	VkSurfaceKHR surface;
+
+	Window& window;
+
+	VkQueue graphicsQueue;
 
 	const std::vector<const char*> validationLayers = { "VK_LAYER_KHRONOS_validation" };
 

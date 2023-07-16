@@ -32,10 +32,12 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT
 	}
 }
 
-Device::Device()
+Device::Device(Window& window)
+	: window(window)
 {
 	CreateInstance();
 	SetupDebugMessenger();
+	CreateSurface();
 	PickPhysicalDevice();
 	CreateLogicalDevice();
 }
@@ -48,6 +50,7 @@ Device::~Device()
 		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
 	}
 
+	vkDestroySurfaceKHR(instance, surface, nullptr);
 	vkDestroyInstance(instance, nullptr);
 }
 
@@ -105,6 +108,11 @@ void Device::SetupDebugMessenger()
 	{
 		throw std::runtime_error("failed to set up debug messenger!");
 	}
+}
+
+void Device::CreateSurface()
+{
+	window.CreateWindowSurface(instance, &surface);
 }
 
 void Device::PickPhysicalDevice()
