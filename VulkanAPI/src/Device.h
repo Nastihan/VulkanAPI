@@ -2,6 +2,12 @@
 #include "Window.h"
 #include <vector>
 
+struct SwapChainSupportDetails
+{
+	VkSurfaceCapabilitiesKHR capabilities;
+	std::vector<VkSurfaceFormatKHR> formats;
+	std::vector<VkPresentModeKHR> presentModes;
+};
 
 struct QueueFamilyIndices
 {
@@ -35,6 +41,8 @@ private:
 	bool CheckValidationLayerSupport();
 	QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);
 	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+	bool CheckDeviceExtensionSupport(VkPhysicalDevice device);
+	SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device);
 
 
 private:
@@ -48,7 +56,9 @@ private:
 	Window& window;
 
 	VkQueue graphicsQueue;
+	VkQueue presentQueue;
 
 	const std::vector<const char*> validationLayers = { "VK_LAYER_KHRONOS_validation" };
+	const std::vector<const char*> deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
 
 };
