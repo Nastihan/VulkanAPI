@@ -1,8 +1,9 @@
 #pragma once
 #include "Window.h"
-#include "Pipieline.h"
+#include "Pipeline.h"
 #include <string>
 #include "Device.h"
+#include "SwapChain.h"
 
 class App
 {
@@ -12,8 +13,9 @@ public:
 	static constexpr int width = 1600;
 	static constexpr int height = 900;
 private:
-	Pipeline p{ "Shaders/VS.vert.spv","Shaders/FS.frag.spv" };
 	Window window{ width,height,"Vulkan" };
-	Device d{ window };
-	
+	Device device{ window };
+	SwapChain swapChain{ device, window.GetExtent() };
+	//Pipeline pipeline{ device, Pipeline::defaultPipelineConfigInfo(width, height), "shaders/simple_vertex_shader.vert.spv", "shaders/simple_fragment_shader.frag.spv" };
+
 };
