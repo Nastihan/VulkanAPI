@@ -43,6 +43,7 @@ void Pipeline::createGraphicsPipeline(const PipelineConfigInfo& configInfo, cons
 	createShaderModule(vertCode, &vertShaderModule);
 	createShaderModule(fragCode, &fragShaderModule);
 
+	// VS & FS shader stage
 	VkPipelineShaderStageCreateInfo shaderStagesCreateInfo[2]{};
 	shaderStagesCreateInfo[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 	shaderStagesCreateInfo[0].stage = VK_SHADER_STAGE_VERTEX_BIT;
@@ -51,7 +52,6 @@ void Pipeline::createGraphicsPipeline(const PipelineConfigInfo& configInfo, cons
 	shaderStagesCreateInfo[0].flags = 0;
 	shaderStagesCreateInfo[0].pNext = nullptr;
 	shaderStagesCreateInfo[0].pSpecializationInfo = nullptr;
-
 	shaderStagesCreateInfo[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 	shaderStagesCreateInfo[1].stage = VK_SHADER_STAGE_FRAGMENT_BIT;
 	shaderStagesCreateInfo[1].module = fragShaderModule;
@@ -59,6 +59,23 @@ void Pipeline::createGraphicsPipeline(const PipelineConfigInfo& configInfo, cons
 	shaderStagesCreateInfo[1].flags = 0;
 	shaderStagesCreateInfo[1].pNext = nullptr;
 	shaderStagesCreateInfo[1].pSpecializationInfo = nullptr;
+
+	// vertex input 
+	VkPipelineVertexInputStateCreateInfo vertexInputCreateInfo{};
+	vertexInputCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+	vertexInputCreateInfo.vertexAttributeDescriptionCount = 0;
+	vertexInputCreateInfo.pVertexBindingDescriptions = nullptr;
+	vertexInputCreateInfo.vertexAttributeDescriptionCount = 0;
+	vertexInputCreateInfo.pVertexAttributeDescriptions = nullptr;
+
+
+
+	VkGraphicsPipelineCreateInfo pipelineCreateInfo{};
+	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	pipelineCreateInfo.pStages = shaderStagesCreateInfo;
+	pipelineCreateInfo.pVertexInputState = &vertexInputCreateInfo;
+
+	
 }
 
 void Pipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* pShaderModule)
