@@ -18,7 +18,7 @@ Pipeline::~Pipeline()
 
 std::vector<char> Pipeline::readFile(const std::string& filepath)
 {
-	std::ifstream file{ filepath, std::ios::ate, std::ios::binary };
+	std::ifstream file{filepath, std::ios::ate | std::ios::binary};
 
 	if (!file.is_open())
 		throw std::runtime_error("failed to open file: " + filepath);
@@ -35,7 +35,7 @@ std::vector<char> Pipeline::readFile(const std::string& filepath)
 
 void Pipeline::createGraphicsPipeline(const PipelineConfigInfo& configInfo, const std::string& vertFilepath, const std::string& fragFilepath)
 {
-	//assert(configInfo.pipelineLayout != VK_NULL_HANDLE && "cannot create graphics pipeline: no pipelineLayout provided in configInfo");
+	assert(configInfo.pipelineLayout != VK_NULL_HANDLE && "cannot create graphics pipeline: no pipelineLayout provided in configInfo");
 	//assert(configInfo.renderPass != VK_NULL_HANDLE && "cannot create graphics pipeline: no renderPass provided in configInfo");
 	auto vertCode = readFile(vertFilepath);
 	auto fragCode = readFile(fragFilepath);
@@ -68,12 +68,20 @@ void Pipeline::createGraphicsPipeline(const PipelineConfigInfo& configInfo, cons
 	vertexInputCreateInfo.vertexAttributeDescriptionCount = 0;
 	vertexInputCreateInfo.pVertexAttributeDescriptions = nullptr;
 
-	// 
+	// view ports & scissors
+	VkPipelineViewportStateCreateInfo viewportCreateInfo{};
+	viewportCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+	viewportCreateInfo.viewportCount = 1;
+	viewportCreateInfo.pViewports = &configInfo.viewport;
+	viewportCreateInfo.scissorCount = 1;
+	viewportCreateInfo.pScissors = &configInfo.scissor;
 
 	VkGraphicsPipelineCreateInfo pipelineCreateInfo{};
 	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
 	pipelineCreateInfo.pStages = shaderStagesCreateInfo;
 	pipelineCreateInfo.pVertexInputState = &vertexInputCreateInfo;
+	pipelineCreateInfo.pInputAssemblyState = &configInfo.inputAssemblyInfo;
+	pipelineCreateInfo.pViewportState = &viewportCreateInfo;
 
 	
 }

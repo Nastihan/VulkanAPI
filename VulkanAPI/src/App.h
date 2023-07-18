@@ -4,11 +4,19 @@
 #include <string>
 #include "Device.h"
 #include "SwapChain.h"
+#include <memory>
 
 class App
 {
 public:
+	App();
+	~App();
 	void Run();
+private:
+	void CreatePipelineLayout();
+	void CreatePipeline();
+	
+
 public: 
 	static constexpr int width = 1600;
 	static constexpr int height = 900;
@@ -16,6 +24,6 @@ private:
 	Window window{ width,height,"Vulkan" };
 	Device device{ window };
 	SwapChain swapChain{ device, window.GetExtent() };
-	//Pipeline pipeline{ device, Pipeline::defaultPipelineConfigInfo(width, height), "shaders/simple_vertex_shader.vert.spv", "shaders/simple_fragment_shader.frag.spv" };
-
+	std::unique_ptr<Pipeline> pipeline;
+	VkPipelineLayout pipelineLayout;
 };

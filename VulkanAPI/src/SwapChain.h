@@ -8,6 +8,11 @@ class SwapChain
 public:
 	SwapChain(Device& device, VkExtent2D windowExtent);
 	~SwapChain();
+	SwapChain(const SwapChain&) = delete;
+	void operator=(const SwapChain&) = delete;
+
+	uint32_t width() { return swapChainExtent.width; }
+	uint32_t height() { return swapChainExtent.height; }
 
 private:
 
