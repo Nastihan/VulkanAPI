@@ -68,7 +68,7 @@ void Pipeline::createGraphicsPipeline(const PipelineConfigInfo& configInfo, cons
 	vertexInputCreateInfo.vertexAttributeDescriptionCount = 0;
 	vertexInputCreateInfo.pVertexAttributeDescriptions = nullptr;
 
-
+	// 
 
 	VkGraphicsPipelineCreateInfo pipelineCreateInfo{};
 	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
