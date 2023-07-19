@@ -40,8 +40,8 @@ void App::CreatePipelineLayout()
 void App::CreatePipeline()
 {
 	auto config = Pipeline::defaultPipelineConfigInfo(swapChain.width(), swapChain.height());
+	config.renderPass = swapChain.getRenderPass();
 	config.pipelineLayout = pipelineLayout;
-	
 	pipeline = std::make_unique<Pipeline>(device, config, "Shaders/VS.vert.spv", "Shaders/FS.frag.spv");
 }
 
