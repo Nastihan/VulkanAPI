@@ -15,6 +15,7 @@ public:
 private:
 	void CreatePipelineLayout();
 	void CreatePipeline();
+	void CreateCommandBuffers();
 	
 
 public: 
@@ -26,4 +27,5 @@ private:
 	SwapChain swapChain{ device, window.GetExtent() };
 	std::unique_ptr<Pipeline> pipeline;
 	VkPipelineLayout pipelineLayout;
+	std::vector<VkCommandBuffer> commandBuffers;
 };

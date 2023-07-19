@@ -11,7 +11,7 @@ public:
 	SwapChain(const SwapChain&) = delete;
 	void operator=(const SwapChain&) = delete;
 
-	//VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
+	VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
 	VkRenderPass getRenderPass() { return renderPass; }
 	VkImageView getImageView(int index) { return swapChainImageViews[index]; }
 	size_t imageCount() { return swapChainImages.size(); }

@@ -27,7 +27,7 @@ SwapChain::~SwapChain()
 		vkDestroySwapchainKHR(device.device(), swapChain, nullptr);
 		swapChain = nullptr;
 	}
-
+	
 	for (auto framebuffer : swapChainFramebuffers)
 	{
 		vkDestroyFramebuffer(device.device(), framebuffer, nullptr);
