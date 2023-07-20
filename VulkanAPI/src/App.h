@@ -16,7 +16,7 @@ private:
 	void CreatePipelineLayout();
 	void CreatePipeline();
 	void CreateCommandBuffers();
-	
+	void DrawFrame();
 
 public: 
 	static constexpr int width = 1600;

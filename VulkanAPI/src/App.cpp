@@ -17,10 +17,11 @@ App::~App()
 
 void App::Run()
 {
-	
+	 
 	while (!window.ShouldClose())
 	{
 		glfwPollEvents();
+		DrawFrame();
 	}
 }
 
@@ -48,6 +49,8 @@ void App::CreatePipeline()
 
 void App::CreateCommandBuffers()
 {
+	commandBuffers.resize(swapChain.imageCount());
+
 	VkCommandBufferAllocateInfo allocInfo{};
 	allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
 	allocInfo.commandPool = device.getCommandPool();
@@ -92,6 +95,22 @@ void App::CreateCommandBuffers()
 		{
 			throw std::runtime_error("failed to record command buffer");
 		}
+	}
+}
+
+void App::DrawFrame()
+{
+	uint32_t imageIndex;
+	auto result = swapChain.acquireNextImage(&imageIndex);
+	if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+	{
+		throw std::runtime_error("failed to acquire swap chain image");
+	}
+
+	result = swapChain.submitCommandBuffers(&commandBuffers[imageIndex], &imageIndex);
+	if (result != VK_SUCCESS)
+	{
+		throw std::runtime_error("failed to present swap chain image");
 	}
 }
 
